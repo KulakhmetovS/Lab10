@@ -67,7 +67,7 @@ int main(int argc, char *argv[])
     // Printing the matrix
     for(i = 0; i < size; i++)
     {
-        DIST[i] = -1;
+        DIST[i] = 100;
         for(j = 0; j < size; j++)
             printf("%3d ", graph[i][j]);
         printf("\n");
@@ -109,7 +109,7 @@ int** Creategraph(int **graph, int size)
     for(i = 0; i < size; i++)
         for(j = i; j < size; j++)
         {
-            graph[i][j] = rand() % 4;
+            graph[i][j] = rand() % 10;
             graph[j][i] = graph[i][j];
             if(i == j) graph[i][j] = 0;
             //if(graph[i][j] == 1);
@@ -132,7 +132,7 @@ void BFSD(int **graph, int *DIST, int size, int v)
 
         for(int i = 0; i < size; i++)
         {
-            if((graph[v][i] > 0) && (DIST[i] == -1))
+            if((graph[v][i] > 0) && (DIST[i] > DIST[v] + graph[v][i]))
             {
                 q.push(i);
                 DIST[i] = DIST[v] + graph[v][i];
@@ -157,7 +157,7 @@ int** CreategraphO(int **graph, int size)
     for(i = 0; i < size; i++)
         for(j = 0; j < size; j++)
         {
-            graph[i][j] = rand() % 4;
+            graph[i][j] = rand() % 10;
             //graph[j][i] = graph[i][j];
             if(i == j) graph[i][j] = 0;
             //if(graph[i][j] == 1);
@@ -173,7 +173,7 @@ void RadiusDiameter(int **graph, int *DIST, int size, int v)
     arr = (int *)(malloc(sizeof(int *) * size));
 
     for(i = 0; i < size; i++)
-        DIST[i] = -1;
+        DIST[i] = 100;
 
     for(i = 0; i < size; i++)
     {
@@ -200,7 +200,7 @@ void RadiusDiameter(int **graph, int *DIST, int size, int v)
         arr[i] = DIST[size - 1];
 
         for(j = 0; j < size; j++)
-            DIST[j] = -1;
+            DIST[j] = 100;
         //printf("  ");
 
     }
@@ -237,7 +237,7 @@ void Vertices(int **graph, int size, int radius, int diameter)
     DIST = (int *)(malloc(sizeof(int *) * size));
 
     for(i = 0; i < size; i++)
-        DIST[i] = -1;
+        DIST[i] = 100;
 
     for(i = 0; i < size; i++)
     {
@@ -262,7 +262,7 @@ void Vertices(int **graph, int size, int radius, int diameter)
         else if(DIST[size - 1] == diameter) printf("%d - Peripheral vertex\n", i);
 
         for(j = 0; j < size; j++)
-            DIST[j] = -1;
+            DIST[j] = 100;
     }
 
     delete[] DIST;
